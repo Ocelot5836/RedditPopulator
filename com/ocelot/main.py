@@ -27,11 +27,13 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         if(message.content.startswith('!populate')):
             parts = message.content.split(' ')
-            if len(parts) > 4:
+            if len(parts) > 3:
                 sub = reddit.subreddit(parts[1])
                 if parts[2] == 'new':
+                    await message.channel.send('Posting ' + parts[3] + ' of the Hottest Submissions from r/' + parts[1])
                     submissions = sub.new(limit=int(parts[3], 10))
                 elif parts[2] == 'top':
+                    await message.channel.send('Posting ' + parts[3] + ' of the Newest Submissions from r/' + parts[1])
                     submissions = sub.top(limit=int(parts[3], 10))
                 else:
                     await message.channel.send('Only new or top are accepted')
@@ -41,6 +43,7 @@ class MyClient(discord.Client):
                     await message.channel.send('||https://reddit.com' + submission.permalink + "||")
             else:
                 await message.channel.send('Not enough arguments.')
+            await message.delete()
 
 
 client = MyClient()
