@@ -116,4 +116,4 @@ dmypy.json
 # Other
 .project
 .pydevproject
-com/ocelot/secret.json
+secret.json
